@@ -1,31 +1,90 @@
 import React, {useState} from 'react';
-import { Container, Paper, TextField, Button } from '@material-ui/core'
+import { Container, Paper, TextField, Button, Dialog, DialogTitle, makeStyles, DialogContentText, DialogContent } from '@material-ui/core'
 import { Auth } from '../../firebase';
 import styles from './signin.module.css';
 import { useRouter } from 'next/router';
 
 interface FormState {
     email: string,
-    password: string
-}
+    password: string,
+    errors: {
+        email: boolean,
+        password: boolean,
+    },
+    apiErrorMessage: string,
+    dialogOpen: boolean
+};
 
 
 const SignInForm = () => {
     const router = useRouter();
 
-    const [form, setform] = useState({email: '', password: ''} as FormState);
+    const [form, setform] = useState({
+        email: '', 
+        password: '',
+        errors: {
+            email: false,
+            password: false,
+        },
+        apiErrorMessage: '',
+        dialogOpen: false,
+    } as FormState);
+
+    const isValid: boolean = (
+        (form.email.length > 0 && !form.errors.email) && 
+        (form.password.length >= 8 && !form.errors.password)
+    ); 
+
+
+    const handleChange = (e) => {
+        e.preventDefault();
+        const { name, value } = e.target;
+        let errors = form.errors;
+
+        switch (name) {
+            case 'email':
+                errors.email = !validEmailRegex(value);
+                break;
+            case 'password':
+                errors.password = value.length < 8;
+                break; 
+            default:
+                break;
+        }
+        setform({...form, errors, [name]: value});
+    };
+
+    const validEmailRegex = (email: string) => {
+        if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)){
+            return true;
+        } else {
+            return false;
+        }
+    };
 
     const handleSignIn = (e) => {
         e.preventDefault();
-        Auth.signInWithEmailAndPassword(form.email, form.password)
+        
+        if (isValid) {
+            Auth.signInWithEmailAndPassword(form.email, form.password)
             .then(()=> {
-                router.replace('/');
+                router.push('/');
             })
             .catch((e) => {
-                console.log(e);
-                router.replace('/');
+                setform({...form, dialogOpen: true, apiErrorMessage:'Email and password invalid.' });
             });
+        } else {
+            setform({...form, dialogOpen: true, apiErrorMessage:'Email and password invalid.'});
+        }
     }
+
+    const useStyles = makeStyles({
+        root: {
+            textAlign: 'center',
+            padding: 200,
+            backgroundColor: 'red',
+        }
+    });
 
     return (
         <Paper className={styles.paper}>
@@ -37,7 +96,8 @@ const SignInForm = () => {
                     label="Email" 
                     required 
                     placeholder="Email"
-                    onChange={(e) => setform({...form, email: e.target.value})}
+                    onChange={handleChange}
+                    name="email"
                 />
                 <TextField 
                     type="password"
@@ -46,17 +106,27 @@ const SignInForm = () => {
                     label="Password" 
                     required 
                     placeholder="Password"
-                    onChange={(p) => setform({...form, password: p.target.value})} 
+                    onChange={handleChange}
+                    name="password"
                 />
 
                 <Button className={styles.submit}
                     variant="contained" 
                     color="primary" 
                     onClick={handleSignIn}
+                    disabled={!isValid}
                 >
                     Sign In
                 </Button>
             </form>
+            <Dialog classes={{paper: useStyles().root}} open={form.dialogOpen} onClose={(e) => {setform({...form, dialogOpen: false})}}>
+                <DialogTitle id="simple-dialog-title">Error Signing In</DialogTitle>
+                <DialogContent>
+                    <DialogContentText>
+                        Sign in failed. Please check email and password.
+                    </DialogContentText>
+                </DialogContent>
+            </Dialog>
         </Paper>
     )
 }

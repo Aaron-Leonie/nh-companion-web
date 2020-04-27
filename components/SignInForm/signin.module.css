@@ -25,3 +25,8 @@
 .submit {
     width: 100px;
 }
+
+.errorDialog{
+    text-align: center;
+    padding: 200px;
+}

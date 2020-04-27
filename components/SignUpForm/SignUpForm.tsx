@@ -31,6 +31,12 @@ const SignUpForm = () => {
         }
     } as FormState);
 
+    // Holds if form is currently valid
+    const isValid: boolean = 
+        (form.email.length > 0 && !form.errors.email) && 
+        (form.password.length >= 8 && !form.errors.password) &&
+        (form.confirmPassword.length >= 8 && form.password === form.confirmPassword);
+
     const handleChange = (e) => {
         e.preventDefault();
         const { name, value } = e.target;
@@ -42,6 +48,9 @@ const SignUpForm = () => {
                 break;
             case 'password':
                 errors.password = value.length < 8;
+                if(form.confirmPassword.length > 0) {
+                    errors.confirmPassword = form.confirmPassword !== value;
+                }
                 break;
             case 'confirmPassword':
                 errors.confirmPassword = value !== form.password;
@@ -50,7 +59,6 @@ const SignUpForm = () => {
                 break;
         }
         setform({...form, errors, [name]: value});
-        console.log(form.errors.confirmPassword && form.errors.password && form.errors.email);
     };
 
     const validEmailRegex = (email: string) => {
@@ -64,15 +72,17 @@ const SignUpForm = () => {
     const handleSignUp = (e) => {
         e.preventDefault();
 
-        if(!form.errors.confirmPassword && !form.errors.password && !form.errors.email) {
+        if(isValid) {
             Auth.createUserWithEmailAndPassword(form.email, form.password)
             .then(()=> {
-                router.replace('/');
+                router.push('/');
             })
             .catch((e) => {
                 console.log(e);
-                router.replace('/');
+                router.push('/');
             });
+        } else {
+            alert('Please enter valid data.');
         }
     }
 
@@ -120,7 +130,7 @@ const SignUpForm = () => {
                 <Button className={styles.submit}
                     variant="contained" 
                     color="primary" 
-                    disabled={form.errors.confirmPassword && form.errors.password && form.errors.email}
+                    disabled={!isValid}
                     onClick={handleSignUp}
                 >
                     Sign In
