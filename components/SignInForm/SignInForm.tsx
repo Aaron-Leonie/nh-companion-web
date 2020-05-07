@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import { Container, Paper, TextField, Button, Dialog, DialogTitle, makeStyles, DialogContentText, DialogContent } from '@material-ui/core'
 import { Auth } from '../../firebase';
+import SimpleDialog from '../SimpleDialog/SimpleDialog'
 import styles from './signin.module.css';
 import { useRouter } from 'next/router';
 
@@ -68,23 +69,28 @@ const SignInForm = () => {
         if (isValid) {
             Auth.signInWithEmailAndPassword(form.email, form.password)
             .then(()=> {
-                router.push('/');
+                router.push('/dashboard');
             })
             .catch((e) => {
-                setform({...form, dialogOpen: true, apiErrorMessage:'Email and password invalid.' });
+                setform({
+                    ...form, 
+                    password: '', 
+                    email: '', 
+                    dialogOpen: true, 
+                    apiErrorMessage:'Email and password invalid.' 
+                });
             });
         } else {
             setform({...form, dialogOpen: true, apiErrorMessage:'Email and password invalid.'});
         }
     }
 
-    const useStyles = makeStyles({
-        root: {
-            textAlign: 'center',
-            padding: 200,
-            backgroundColor: 'red',
-        }
-    });
+    const handleClose = () => {
+        setform({
+            ...form,
+            dialogOpen: false,
+        });
+    }
 
     return (
         <Paper className={styles.paper}>
@@ -92,6 +98,7 @@ const SignInForm = () => {
             <form className={styles.signInForm}>
                 <TextField 
                     className={styles.textInputs} 
+                    value={form.email}
                     id="standard-basic" 
                     label="Email" 
                     required 
@@ -101,6 +108,7 @@ const SignInForm = () => {
                 />
                 <TextField 
                     type="password"
+                    value={form.password}
                     className={styles.textInputs} 
                     id="standard-basic" 
                     label="Password" 
@@ -119,14 +127,12 @@ const SignInForm = () => {
                     Sign In
                 </Button>
             </form>
-            <Dialog classes={{paper: useStyles().root}} open={form.dialogOpen} onClose={(e) => {setform({...form, dialogOpen: false})}}>
-                <DialogTitle id="simple-dialog-title">Error Signing In</DialogTitle>
-                <DialogContent>
-                    <DialogContentText>
-                        Sign in failed. Please check email and password.
-                    </DialogContentText>
-                </DialogContent>
-            </Dialog>
+            <SimpleDialog 
+                title={'Cannot Sign In'} 
+                body={form.apiErrorMessage}
+                open={form.dialogOpen}
+                onClose={handleClose}
+            />
         </Paper>
     )
 }

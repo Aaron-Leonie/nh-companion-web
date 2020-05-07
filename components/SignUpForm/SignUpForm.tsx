@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import { Container, Paper, TextField, Button } from '@material-ui/core'
 import { Auth } from '../../firebase';
 import styles from './SignUpForm.module.css';
+import SimpleDialog from '../SimpleDialog/SimpleDialog';
 import { useRouter } from 'next/router';
 
 interface FormState {
@@ -12,6 +13,11 @@ interface FormState {
         email: boolean,
         password: boolean,
         confirmPassword: boolean,
+    },
+    dialog: {
+        title: string,
+        message: string,
+        opened: boolean,
     }
 }
 
@@ -28,6 +34,11 @@ const SignUpForm = () => {
             password: false,
             confirmPassword: false,
 
+        },
+        dialog: {
+            title: '',
+            message: '',
+            opened: false,
         }
     } as FormState);
 
@@ -78,12 +89,37 @@ const SignUpForm = () => {
                 router.push('/');
             })
             .catch((e) => {
-                console.log(e);
-                router.push('/');
+                setform({
+                    ...form,
+                    dialog: {
+                        opened: true,
+                        message: 'Please try again later.',
+                        title: 'Error Signing Up'
+    
+                    }
+                });
             });
         } else {
-            alert('Please enter valid data.');
+            setform({
+                ...form,
+                dialog: {
+                    opened: true,
+                    message: 'Please enter valid information.',
+                    title: 'Error Signing Up'
+
+                }
+            });
         }
+    }
+
+    const handleClose = (): void => {
+        setform({ 
+            ...form,
+            dialog: {
+                ...form.dialog,
+                opened: false,
+            }
+        });
     }
 
     return (
@@ -136,6 +172,12 @@ const SignUpForm = () => {
                     Sign In
                 </Button>
             </form>
+            <SimpleDialog 
+                open={form.dialog.opened}
+                title={form.dialog.title}
+                body={form.dialog.message}
+                onClose={handleClose}
+            />
         </Paper>
     )
 }
