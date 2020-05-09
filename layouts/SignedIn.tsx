@@ -1,16 +1,22 @@
 import React, {useState, useContext} from 'react';
-import {Container, Button, makeStyles, Theme, createStyles } from '@material-ui/core';
 import BottomNav from '../components/BottomNav/BottomNav';
 import DrawerNav from '../components/DrawerNav/DrawerNav';
 import TopBar from '../components/TopBar/TopBar';
-import { withAuth, UserConext } from '../providers/AuthProvider';
+import { withAuth } from '../providers/AuthProvider';
+import { withStyles } from '@material-ui/styles';
 
+
+const styles = theme => ({
+    toolbar: theme.mixins.toolbar,
+  });
 
 const SingedIn = (props) => {
 
+    const { classes } = props; 
+
     const [drawer, setdrawer] = useState(false);
-    const user = useContext(UserConext);
-    console.log(user);
+    // const user = useContext(UserConext);
+    // console.log(user);
 
     const handleClose = () => {
         setdrawer(prv => (!drawer));
@@ -24,15 +30,15 @@ const SingedIn = (props) => {
     return (
         <React.Fragment>
             <TopBar openDrawer={openDrawer}/>
-            <Container>
-                <Button onClick={openDrawer} color="primary">Open </Button >
-                <DrawerNav open={drawer} onClose={handleClose}/>
+            <div className={classes.toolbar}/>
+            <DrawerNav open={drawer} onClose={handleClose}/>
+                <div>
                     {props.children}
-                <BottomNav />
-            </Container>
+                </div>
+            <BottomNav />
         </React.Fragment>
     );
 
 }
 
-export default withAuth(SingedIn);
+export default withStyles(styles)(withAuth(SingedIn));
