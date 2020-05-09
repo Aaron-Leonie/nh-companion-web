@@ -10,12 +10,13 @@ const Post  = (props) => {
                 <div className={styles.postHeader}>
                     <Avatar className={styles.avatar}>AH</Avatar>
                     <div className={styles.headerText}>
-                        <div className={styles.headerTextName}>
+                        {/* <div className={styles.headerTextName}>
 
                         </div>
                         <div className={styles.headerTextIsland}>
 
-                        </div>
+                        </div> */}
+                        Hello
                     </div>
                     <div className={styles.postOptions}>
                     <IconButton><MoreVertIcon /></IconButton>
