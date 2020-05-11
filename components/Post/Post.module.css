@@ -8,6 +8,7 @@
     flex-direction: column;
     margin: 40px 10px 0 10px;
     background-color: aqua;
+    border-radius: 15px;
 }
 
 .postHeader {
@@ -18,8 +19,22 @@
 }
 
 .avatar {
+    margin: 10px;
 }
 
 .postOptions {
     margin-left: auto
+}
+
+.headerTextName {
+    font-size: 18px;
+    font-weight: 550;
+}
+
+.headerTextIsland{
+    font-size: 14px;
+}
+
+.postBody {
+    margin: 10px;
 }
