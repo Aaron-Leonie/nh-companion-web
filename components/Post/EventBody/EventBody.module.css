@@ -1,0 +1,22 @@
+.eventPostContainer {
+    display: flex;
+    flex-direction: row;
+    margin: 15px;
+}
+
+.postBody {
+    margin-left: 15px;
+}
+
+.imgContainer {
+    margin: 0px 0px 0px 15px;
+}
+
+.eventTitle {
+    font-size: 18px;
+    font-weight: 550;
+}
+
+.descriptionText {
+    font-size: 16px;
+}

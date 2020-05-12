@@ -6,6 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import TodayIcon from '@material-ui/icons/Today';
 import EmojiNatureIcon from '@material-ui/icons/EmojiNature';
 import SettingsIcon from '@material-ui/icons/Settings';
+import BeetsIcon from '../Icons/BeetsIcon';
 
 
 const useStyles = makeStyles({
@@ -33,6 +34,7 @@ const BottomNav = () => {
             <BottomNavigationAction label="Feed" value="Feed" icon={<ListIcon/>}/>
             <BottomNavigationAction label="Tasks" value="Tasks" icon={<TodayIcon />} />
             <BottomNavigationAction label="Bugs" value="Bugs" icon={<EmojiNatureIcon />}/>
+            <BottomNavigationAction label="Turnips" value="Turnips" icon={<BeetsIcon />}/>
             <BottomNavigationAction label="Settings" value="Settings" icon={<SettingsIcon />}/>
         </BottomNavigation>
     );

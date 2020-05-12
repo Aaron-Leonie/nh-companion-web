@@ -1,0 +1,44 @@
+.aboutContainer {
+    display: flex;
+    flex-direction: column;
+    background-color: green;
+    width: 100%;
+    border-radius: 10px;
+    margin: 10px 10px;
+}
+
+.aboutHeader {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding: 10px;
+}
+
+.avatar {
+}
+
+.titleAbout {
+    margin: 0 10px;
+}
+
+.nameText {
+    font-size: 18px;
+    font-weight: 550;
+}
+
+.islandName {
+    font-size: 13px;
+}
+
+.headerButtons {
+    margin-left: auto;
+}
+
+.aboutText{
+    margin: 10px;
+}
+
+.friendCode {
+    text-align: center;
+    font-size: 12px;
+}
