@@ -2,7 +2,9 @@
     display: flex;
     flex-direction: column;
     background-color: green;
-    width: 500px;
+    width: 100%;
+    border-radius: 10px;
+    margin: 10px 10px;
 }
 
 .aboutHeader {
@@ -26,4 +28,17 @@
 
 .islandName {
     font-size: 13px;
+}
+
+.headerButtons {
+    margin-left: auto;
+}
+
+.aboutText{
+    margin: 10px;
+}
+
+.friendCode {
+    text-align: center;
+    font-size: 12px;
 }

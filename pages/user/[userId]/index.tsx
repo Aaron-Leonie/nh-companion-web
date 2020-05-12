@@ -16,7 +16,8 @@ const useStyles = makeStyles({
     parentPageContents: {
         display: 'flex',
         alignItems: 'center',
-        flexDirection: 'column'
+        flexDirection: 'column',
+        margin: 15,
     }
 });
 
