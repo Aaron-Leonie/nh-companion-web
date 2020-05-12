@@ -1,29 +1,46 @@
 import React from 'react';
 import styles from './Post.module.css'
-import { Avatar, IconButton } from '@material-ui/core';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
+import PostHeader from './PostHeader/PostHeader';
+import TextBody from './TextBody/TextBody';
+import EventBody from './EventBody/EventBody';
+import { PostHeaderProps } from './PostHeader/PostHeader';
+import { TextBodyProps } from './TextBody/TextBody';
+import { EventBodyProps } from './EventBody/EventBody';
 
-const Post  = (props) => {
+
+interface PostProps {
+    type: string,
+    postHeader: PostHeaderProps,
+    textBody?: TextBodyProps,
+    eventBody?: EventBodyProps,
+};
+
+const Post  = (props: PostProps) => {
+
+    let postBody;
+
+    switch(props.type) {
+        case 'text':
+            postBody = (
+                <TextBody {...props.textBody} />
+            );
+            break;
+        case 'event':
+            postBody = (
+                <EventBody 
+                    {...props.eventBody}
+                />
+            );
+            break;
+        default:
+            break;
+    }
+
     return (
         <div className={styles.postContainer}>
             <div className={styles.post}>
-                <div className={styles.postHeader}>
-                    <Avatar className={styles.avatar}>AH</Avatar>
-                    <div className={styles.headerText}>
-                        <div className={styles.headerTextName}>
-                            <span>Aaron Hawkey</span>
-                        </div>
-                        <div className={styles.headerTextIsland}>
-                            <span>An Island</span>
-                        </div>
-                    </div>
-                    <div className={styles.postOptions}>
-                    <IconButton><MoreVertIcon /></IconButton>
-                    </div>
-                </div>
-                <div className={styles.postBody}>
-                    <p>This is my post. Hello everyone. I want some fucking turnips.</p>
-                </div>
+                <PostHeader {...props.postHeader}/>
+                {postBody}
             </div>
         </div>
     );
@@ -31,6 +48,5 @@ const Post  = (props) => {
 
 export default Post;
 
-// TODO: Make post header component. 
 // TODO: Make post type -- render on post type
 // Make status post componenet

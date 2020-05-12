@@ -3,7 +3,7 @@ import { Auth } from '../firebase';
 import { withAuth, UserConext  } from '../providers/AuthProvider';
 import { useRouter } from 'next/router';
 import { Button, makeStyles } from '@material-ui/core';
-import SingedIn from '../layouts/SignedIn';
+import SignedIn from '../layouts/SignedIn';
 import PostField from '../components/PostField/PostField';
 import Post from '../components/Post/Post';
 
@@ -35,16 +35,54 @@ const dashboard = (props) => {
     };
 
     return (
-        <SingedIn>
+        <SignedIn>
             <div className={classes.parentPageContents}>
                 <div className={classes.pageContents}>
                     <PostField />
-                    <Post />
-                    <Post />
-                    <Post />
+                    <Post 
+                        type="text"
+                        postHeader={{
+                            createdAt:1589233544224,
+                            userFullName: 'Aaron Hawkey',
+                            islandName: 'Island Name',
+                            userId: 'asd2389huif3',
+                            avatarSrc: 'asdasdassdasda.com'
+                        }}
+                        textBody={{
+                            postBody: 'This is my post. Hello everyone. I want some fucking turnips.'
+                        }}
+                    />
+                    <Post 
+                        type="event"
+                        postHeader={{
+                            createdAt:1589233547224,
+                            userFullName: 'Aaron Hawkey',
+                            islandName: 'Island Name',
+                            userId: 'asd2389huif3',
+                            avatarSrc: 'asdasdassdasda.com'
+                        }}
+                        eventBody={{
+                            eventTitle: 'Island Name\'s gates are open.',
+                            body: 'Come on friends. Lets party on my island.',
+                            inviteStatus: 'Friends Only',
+                        }}
+                    />
+                    <Post 
+                        type="text"
+                        postHeader={{
+                            createdAt: 1589233547224,
+                            userFullName: 'Aaron Hawkey',
+                            islandName: 'Island Name',
+                            userId: 'asd2389huif3',
+                            avatarSrc: 'asdasdassdasda.com'
+                        }}
+                        textBody={{
+                            postBody: 'ASDF',
+                        }}
+                    />
                 </div>
             </div>
-        </SingedIn>
+        </SignedIn>
     );
 }
 

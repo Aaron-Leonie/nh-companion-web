@@ -1,8 +1,0 @@
-.eventPostContainer {
-    display: flex;
-    flex-direction: row;
-}
-
-.postBody {
-    margin-left: 15px;
-}
