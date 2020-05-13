@@ -1,12 +1,13 @@
 import React from 'react';
-import { makeStyles, createStyles, Theme, AppBar, Toolbar, IconButton, Typography, Button } from '@material-ui/core';
+import { makeStyles, createStyles, AppBar, Toolbar, IconButton, Typography, Button } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import { Auth } from '../../firebase';
 import { useRouter } from 'next/router';
+import { DefaultTheme } from '../../themes/DefaultTheme';
 
 
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme) =>
         createStyles({
             title: {
                 flexGrow: 1,
@@ -35,7 +36,7 @@ const TopBar = (props) => {
     };
 
     return (
-        <AppBar position="fixed">
+        <AppBar position="fixed" color="primary">
         <Toolbar>
           <IconButton onClick={triggerOpen} edge="start" color="inherit" aria-label="menu">
             <MenuIcon />

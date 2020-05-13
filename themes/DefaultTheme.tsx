@@ -6,12 +6,27 @@ import { purple } from '@material-ui/core/colors';
 export const DefaultTheme = createMuiTheme({
     palette: {
         primary: {
-        // Purple and green play nicely together.
-            main: '#11cb5f',
+            light: '#1F8FAC',
+            main: '#148AA8',
+            dark: '#0F586B',
         },
         secondary: {
-        // This is green.A700 as hex.
-            main: '#11cb5f',
+            light: '#85CE46',
+            main: '#68AD19',
+            dark: '#199319',
+        },
+        warning: {
+            light: '#E3BD52',
+            main: '#E1B137',
+            dark: '#B89432',
+
         },
   },
+  typography: {
+      fontFamily: [
+          'Arial',
+          'Helvetica',
+          'sans-serif',
+      ].join(','),
+  }
 });

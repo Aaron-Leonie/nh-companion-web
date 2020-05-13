@@ -4,3 +4,16 @@ body {
 p {
     margin: 0;
 }
+html {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #EEF7FF;
+}
+
+.card{
+    background-color: #ffffff;
+    opacity: 95%;
+}
+
+textarea {
+    font-family: Arial, Helvetica, sans-serif;
+}

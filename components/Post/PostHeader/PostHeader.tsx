@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './PostHeader.module.css';
 import { Avatar} from '@material-ui/core';
 import PostMenu from './PostMenu/PostMenu';
+import Link from 'next/link';
 
 export interface PostHeaderProps {
     userId: string,
@@ -46,7 +47,9 @@ const PostHeader  = (props: PostHeaderProps) => {
             <Avatar className={styles.avatar}>AH</Avatar>
             <div className={styles.headerText}>
                 <div className={styles.headerTextName}>
-                    <span>{props.userFullName}</span>
+                    <Link href={`/user/${props.userId}`}>
+                        <span>{props.userFullName}</span>
+                    </Link>
                 </div>
                 <div className={styles.headerTextIsland}>
                     <span>{props.islandName}</span>
@@ -54,7 +57,7 @@ const PostHeader  = (props: PostHeaderProps) => {
                     <span>{timeAgo(props.createdAt) + ' ago'}</span>
                 </div>
             </div>
-            <PostMenu />
+            <PostMenu userId={props.userId}/>
         </div>
     );
 };

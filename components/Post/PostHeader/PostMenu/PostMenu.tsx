@@ -1,12 +1,13 @@
 import React from 'react';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import {IconButton, Menu, MenuItem} from '@material-ui/core';
+import Link from 'next/link';
 
 interface PostMenuProps {
     userId?: string,
 };
 
-const PostMenu = (props) => {
+const PostMenu = (props: PostMenuProps) => {
 
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
@@ -28,7 +29,7 @@ const PostMenu = (props) => {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
             >
-                <MenuItem onClick={handleClose}>View Profile</MenuItem>
+                <Link href={`/user/${props.userId}`}><MenuItem onClick={handleClose}>View Profile</MenuItem></Link>
                 <MenuItem onClick={handleClose}>Message User</MenuItem>
             </Menu>
         </div>

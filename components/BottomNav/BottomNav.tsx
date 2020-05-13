@@ -15,14 +15,21 @@ const useStyles = makeStyles({
       position: 'fixed',
       bottom: 0,
       left: 0,
-      backgroundColor: '#1488AA',
+      backgroundColor: '#148AA8',
     },
+    buttonSelected:{
+        color: '#ffffff !IMPORTANT'
+    }
   });
 
 
 const BottomNav = () => {
 
     const classes = useStyles();
+
+    const buttonClass = {
+        color: '#ffffff',
+    }
     
     const [value, setValue] = React.useState('Feed');
     const handleChange = (event: React.ChangeEvent<{}>, newValue: string) => {
@@ -31,11 +38,11 @@ const BottomNav = () => {
 
     return (
         <BottomNavigation value={value} onChange={handleChange} className={classes.root}>
-            <BottomNavigationAction label="Feed" value="Feed" icon={<ListIcon/>}/>
-            <BottomNavigationAction label="Tasks" value="Tasks" icon={<TodayIcon />} />
-            <BottomNavigationAction label="Bugs" value="Bugs" icon={<EmojiNatureIcon />}/>
-            <BottomNavigationAction label="Turnips" value="Turnips" icon={<BeetsIcon />}/>
-            <BottomNavigationAction label="Settings" value="Settings" icon={<SettingsIcon />}/>
+            <BottomNavigationAction classes={{selected: classes.buttonSelected}} label="Feed" value="Feed" icon={<ListIcon/>}/>
+            <BottomNavigationAction classes={{selected: classes.buttonSelected}} label="Tasks" value="Tasks" icon={<TodayIcon />} />
+            <BottomNavigationAction classes={{selected: classes.buttonSelected}} label="Bugs" value="Bugs" icon={<EmojiNatureIcon />}/>
+            <BottomNavigationAction classes={{selected: classes.buttonSelected}} label="Turnips" value="Turnips" icon={<BeetsIcon />}/>
+            <BottomNavigationAction classes={{selected: classes.buttonSelected}} label="Settings" value="Settings" icon={<SettingsIcon />}/>
         </BottomNavigation>
     );
 }

@@ -6,6 +6,7 @@ import EventBody from './EventBody/EventBody';
 import { PostHeaderProps } from './PostHeader/PostHeader';
 import { TextBodyProps } from './TextBody/TextBody';
 import { EventBodyProps } from './EventBody/EventBody';
+import cn from 'classnames';
 
 
 interface PostProps {
@@ -38,7 +39,7 @@ const Post  = (props: PostProps) => {
 
     return (
         <div className={styles.postContainer}>
-            <div className={styles.post}>
+            <div className={cn(styles.post, 'card')}>
                 <PostHeader {...props.postHeader}/>
                 {postBody}
             </div>

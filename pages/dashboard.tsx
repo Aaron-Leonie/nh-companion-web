@@ -80,6 +80,62 @@ const dashboard = (props) => {
                             postBody: 'ASDF',
                         }}
                     />
+                    <Post 
+                        type="event"
+                        postHeader={{
+                            createdAt:1589233547224,
+                            userFullName: 'Aaron Hawkey',
+                            islandName: 'Island Name',
+                            userId: 'asd2389huif3',
+                            avatarSrc: 'asdasdassdasda.com'
+                        }}
+                        eventBody={{
+                            eventTitle: 'Island Name\'s gates are open.',
+                            body: 'Come on friends. Lets party on my island.',
+                            inviteStatus: 'Friends Only',
+                        }}
+                    />
+                    <Post 
+                        type="text"
+                        postHeader={{
+                            createdAt: 1589233547224,
+                            userFullName: 'Aaron Hawkey',
+                            islandName: 'Island Name',
+                            userId: 'asd2389huif3',
+                            avatarSrc: 'asdasdassdasda.com'
+                        }}
+                        textBody={{
+                            postBody: 'ASDF',
+                        }}
+                    />
+                    <Post 
+                        type="event"
+                        postHeader={{
+                            createdAt:1589233547224,
+                            userFullName: 'Aaron Hawkey',
+                            islandName: 'Island Name',
+                            userId: 'asd2389huif3',
+                            avatarSrc: 'asdasdassdasda.com'
+                        }}
+                        eventBody={{
+                            eventTitle: 'Island Name\'s gates are open.',
+                            body: 'Come on friends. Lets party on my island.',
+                            inviteStatus: 'Friends Only',
+                        }}
+                    />
+                    <Post 
+                        type="text"
+                        postHeader={{
+                            createdAt: 1589233547224,
+                            userFullName: 'Aaron Hawkey',
+                            islandName: 'Island Name',
+                            userId: 'asd2389huif3',
+                            avatarSrc: 'asdasdassdasda.com'
+                        }}
+                        textBody={{
+                            postBody: 'ASDF',
+                        }}
+                    />
                 </div>
             </div>
         </SignedIn>
