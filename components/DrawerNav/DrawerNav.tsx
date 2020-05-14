@@ -40,10 +40,10 @@ const DrawerNav = (props) => {
             classes={{paper: muiStyles.navPaper}}
             >
                 <List>
-                    <Link href='/dashboard'>
+                    <Link href='/feed'>
                         <ListItem>
                             <ListItemIcon><ListIcon style={{color: 'white'}}/></ListItemIcon>
-                            <ListItemText primary="Dashboard" />
+                            <ListItemText primary="News Feed" />
                         </ListItem>
                     </Link>
                 </List>

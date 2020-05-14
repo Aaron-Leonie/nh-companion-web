@@ -49,7 +49,7 @@ const BottomNav = () => {
         setValue(newValue);
         switch(newValue){
             case 'Feed':
-                router.push('/dashboard');
+                router.push('/feed');
                 return;
             case 'Tasks':
                 router.push('/user/[userId]', '/user/asdf');

@@ -69,7 +69,7 @@ const SignInForm = () => {
         if (isValid) {
             Auth.signInWithEmailAndPassword(form.email, form.password)
             .then(()=> {
-                router.push('/dashboard');
+                router.push('/feed');
             })
             .catch((e) => {
                 setform({
