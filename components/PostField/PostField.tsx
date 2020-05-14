@@ -19,7 +19,7 @@ export default function PostField() {
                         <div id="events" className={cn(styles.statusButton, styles.buttonLeft)}>
 
                             <Button
-                                style={{width: '100%'}}
+                                style={{width: '100%', fontWeight: 550}}
                                 variant="text"
                                 color="primary"
                                 startIcon={<EventIcon/>}
@@ -31,7 +31,7 @@ export default function PostField() {
                         </div>
                         <div id="flights" className={cn(styles.statusButton, styles.buttonRight)}>
                             <Button
-                                style={{width: '100%'}}
+                                style={{width: '100%', fontWeight: 550}}
                                 variant="text"
                                 color="primary"
                                 startIcon={ <FlightTakeoffIcon/>}

@@ -4,6 +4,20 @@ import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+import styles from './DrawerNav.module.css';
+import { makeStyles } from '@material-ui/core';
+import ListIcon from '@material-ui/icons/List';
+import Link from 'next/link';
+
+
+const useStyles = makeStyles({
+    navPaper: {
+        backgroundColor: '#73B9CB',
+        color: 'white',
+        fontWeight: 550,
+        width: 250,
+    }
+});
 
 
 const DrawerNav = (props) => {
@@ -12,16 +26,29 @@ const DrawerNav = (props) => {
         props.onClose();
     }
 
+    const muiStyles = useStyles();
+
 
     
     return (
-        <Drawer anchor="left" open={props.open} onClose={handleClose} style={{zIndex: 1101}}>
-            <List>
-                <ListItem>
-                    <ListItemText primary="Dashboard" />
-                </ListItem>
-            </List>
-        </Drawer>
+        <div className={styles.navContainer}>
+            <Drawer 
+            anchor="left" 
+            open={props.open} 
+            onClose={handleClose} 
+            style={{zIndex: 1101}}
+            classes={{paper: muiStyles.navPaper}}
+            >
+                <List>
+                    <Link href='/dashboard'>
+                        <ListItem>
+                            <ListItemIcon><ListIcon style={{color: 'white'}}/></ListItemIcon>
+                            <ListItemText primary="Dashboard" />
+                        </ListItem>
+                    </Link>
+                </List>
+            </Drawer>
+        </div>
     );
 }
 

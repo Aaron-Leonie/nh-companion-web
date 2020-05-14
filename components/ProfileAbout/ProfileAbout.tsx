@@ -4,6 +4,7 @@ import {Avatar, IconButton} from '@material-ui/core';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import HomeIcon from '@material-ui/icons/Home';
 import InsertCommentIcon from '@material-ui/icons/InsertComment';
+import cn from 'classnames';
 
 export interface ProfileAboutProps {
     userFullName: string,
@@ -15,7 +16,7 @@ export interface ProfileAboutProps {
 
 const ProfileAbout = (props: ProfileAboutProps) => {
     return (
-        <div className={styles.aboutContainer}>
+        <div className={cn(styles.aboutContainer, 'card')}>
             <div className={styles.aboutHeader}>
                 <Avatar className={styles.avatar}>AH</Avatar>
                 <div className={styles.titleAbout}>

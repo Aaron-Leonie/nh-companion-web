@@ -7,6 +7,7 @@ import TodayIcon from '@material-ui/icons/Today';
 import EmojiNatureIcon from '@material-ui/icons/EmojiNature';
 import SettingsIcon from '@material-ui/icons/Settings';
 import BeetsIcon from '../Icons/BeetsIcon';
+import { useRouter } from 'next/router';
 
 
 const useStyles = makeStyles({
@@ -31,9 +32,31 @@ const BottomNav = () => {
         color: '#ffffff',
     }
     
-    const [value, setValue] = React.useState('Feed');
+    const router = useRouter();
+
+    const getCurrentField = (): string => {
+        if (router.pathname.includes('dashboard')) {
+            return 'Feed';
+        } else if(router.pathname.includes('user')){
+            return 'Tasks';
+        } else {
+            return 'Feed';
+        }
+    }
+    
+    const [value, setValue] = React.useState(getCurrentField());
     const handleChange = (event: React.ChangeEvent<{}>, newValue: string) => {
         setValue(newValue);
+        switch(newValue){
+            case 'Feed':
+                router.push('/dashboard');
+                return;
+            case 'Tasks':
+                router.push('/user/[userId]', '/user/asdf');
+                return; 
+            default:
+                return;
+        }
     };
 
     return (
