@@ -47,7 +47,7 @@ const PostHeader  = (props: PostHeaderProps) => {
             <Avatar className={styles.avatar}>AH</Avatar>
             <div className={styles.headerText}>
                 <div className={styles.headerTextName}>
-                    <Link href={`/user/${props.userId}`}>
+                    <Link href="/user/[userId]" as={`/user/${props.userId}`}>
                         <span>{props.userFullName}</span>
                     </Link>
                 </div>

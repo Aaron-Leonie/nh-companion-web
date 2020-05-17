@@ -29,7 +29,9 @@ const PostMenu = (props: PostMenuProps) => {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
             >
-                <Link href={`/user/${props.userId}`}><MenuItem onClick={handleClose}>View Profile</MenuItem></Link>
+                <Link href="/user/[userId]" as={`/user/${props.userId}`} passHref>
+                    <MenuItem onClick={handleClose}>View Profile</MenuItem>
+                </Link>
                 <MenuItem onClick={handleClose}>Message User</MenuItem>
             </Menu>
         </div>

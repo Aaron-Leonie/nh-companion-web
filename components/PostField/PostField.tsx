@@ -1,13 +1,26 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {Paper, Container, makeStyles, TextareaAutosize, Avatar, Button} from '@material-ui/core'
 import styles from './PostField.module.css';
 import EventIcon from '@material-ui/icons/Event';
 import FlightTakeoffIcon from '@material-ui/icons/FlightTakeoff';
+import EventModal from '../EventsModal/EventModal';
 import cn from 'classnames';
 
 
 
 export default function PostField() {
+
+    const [event, setEvent] = useState(false);
+
+
+    const handleEventsClick = () => {
+        return setEvent(true);
+    };
+
+    const handleEventClose = () => {
+        return setEvent(false);
+    };
+
 
     return (
             <div className={cn(styles.fieldContainer, 'card')}>
@@ -23,6 +36,7 @@ export default function PostField() {
                                 variant="text"
                                 color="primary"
                                 startIcon={<EventIcon/>}
+                                onClick={handleEventsClick}
                             >
                                 Events
                             </Button>
@@ -40,6 +54,7 @@ export default function PostField() {
                             </Button>
                         </div>
                     </div>
+                    <EventModal open={event} onClose={handleEventClose}/>
             </div>
     );
 };

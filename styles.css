@@ -1,5 +1,8 @@
 body {
     margin: 0 auto;
+    --primary-main-color: #148AA8;
+    --primary-background-color: #EEF7FF;
+    --primary-border-radius: 10px;
 }
 p {
     margin: 0;

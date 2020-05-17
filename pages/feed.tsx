@@ -6,6 +6,7 @@ import { Button, makeStyles } from '@material-ui/core';
 import SignedIn from '../layouts/SignedIn';
 import PostField from '../components/PostField/PostField';
 import Post from '../components/Post/Post';
+import Head from 'next/head';
 
 
 const useStyles = makeStyles({
@@ -36,6 +37,9 @@ const dashboard = (props) => {
 
     return (
         <SignedIn>
+            <Head>
+                <title>News Feed</title>
+            </Head>
             <div className={classes.parentPageContents}>
                 <div className={classes.pageContents}>
                     <PostField />
