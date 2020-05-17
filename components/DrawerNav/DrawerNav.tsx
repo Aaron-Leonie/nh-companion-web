@@ -7,6 +7,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import styles from './DrawerNav.module.css';
 import { makeStyles } from '@material-ui/core';
 import ListIcon from '@material-ui/icons/List';
+import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import Link from 'next/link';
 
 
@@ -43,9 +44,13 @@ const DrawerNav = (props) => {
                     <Link href='/feed'>
                         <ListItem>
                             <ListItemIcon><ListIcon style={{color: 'white'}}/></ListItemIcon>
-                            <ListItemText primary="News Feed" />
+                            <ListItemText primary="News Feed"/>
                         </ListItem>
                     </Link>
+                    <ListItem>
+                            <ListItemIcon><AccountBoxIcon style={{color: 'white'}}/></ListItemIcon>
+                            <ListItemText primary="My Profile" />
+                        </ListItem>
                 </List>
             </Drawer>
         </div>
