@@ -47,20 +47,20 @@ const dashboard = (props) => {
                         type="text"
                         postHeader={{
                             createdAt:1589233544224,
-                            userFullName: 'Aaron Hawkey',
+                            userFullName: 'AfterMidnight',
                             islandName: 'Island Name',
                             userId: 'asd2389huif3',
                             avatarSrc: 'asdasdassdasda.com'
                         }}
                         textBody={{
-                            postBody: 'This is my post. Hello everyone. I want some fucking turnips.'
+                            postBody: 'This is my post. Hello everyone.'
                         }}
                     />
                     <Post 
                         type="event"
                         postHeader={{
                             createdAt:1589233547224,
-                            userFullName: 'Aaron Hawkey',
+                            userFullName: 'AfterMidnight',
                             islandName: 'Island Name',
                             userId: 'asd2389huif3',
                             avatarSrc: 'asdasdassdasda.com'
@@ -75,35 +75,7 @@ const dashboard = (props) => {
                         type="text"
                         postHeader={{
                             createdAt: 1589233547224,
-                            userFullName: 'Aaron Hawkey',
-                            islandName: 'Island Name',
-                            userId: 'asd2389huif3',
-                            avatarSrc: 'asdasdassdasda.com'
-                        }}
-                        textBody={{
-                            postBody: 'ASDF',
-                        }}
-                    />
-                    <Post 
-                        type="event"
-                        postHeader={{
-                            createdAt:1589233547224,
-                            userFullName: 'Aaron Hawkey',
-                            islandName: 'Island Name',
-                            userId: 'asd2389huif3',
-                            avatarSrc: 'asdasdassdasda.com'
-                        }}
-                        eventBody={{
-                            eventTitle: 'Island Name\'s gates are open.',
-                            body: 'Come on friends. Lets party on my island.',
-                            inviteStatus: 'Friends Only',
-                        }}
-                    />
-                    <Post 
-                        type="text"
-                        postHeader={{
-                            createdAt: 1589233547224,
-                            userFullName: 'Aaron Hawkey',
+                            userFullName: 'AfterMidnight',
                             islandName: 'Island Name',
                             userId: 'asd2389huif3',
                             avatarSrc: 'asdasdassdasda.com'
@@ -116,7 +88,7 @@ const dashboard = (props) => {
                         type="event"
                         postHeader={{
                             createdAt:1589233547224,
-                            userFullName: 'Aaron Hawkey',
+                            userFullName: 'AfterMidnight',
                             islandName: 'Island Name',
                             userId: 'asd2389huif3',
                             avatarSrc: 'asdasdassdasda.com'
@@ -131,7 +103,35 @@ const dashboard = (props) => {
                         type="text"
                         postHeader={{
                             createdAt: 1589233547224,
-                            userFullName: 'Aaron Hawkey',
+                            userFullName: 'AfterMidnight',
+                            islandName: 'Island Name',
+                            userId: 'asd2389huif3',
+                            avatarSrc: 'asdasdassdasda.com'
+                        }}
+                        textBody={{
+                            postBody: 'ASDF',
+                        }}
+                    />
+                    <Post 
+                        type="event"
+                        postHeader={{
+                            createdAt:1589233547224,
+                            userFullName: 'AfterMidnight',
+                            islandName: 'Island Name',
+                            userId: 'asd2389huif3',
+                            avatarSrc: 'asdasdassdasda.com'
+                        }}
+                        eventBody={{
+                            eventTitle: 'Island Name\'s gates are open.',
+                            body: 'Come on friends. Lets party on my island.',
+                            inviteStatus: 'Friends Only',
+                        }}
+                    />
+                    <Post 
+                        type="text"
+                        postHeader={{
+                            createdAt: 1589233547224,
+                            userFullName: 'AfterMidnight',
                             islandName: 'Island Name',
                             userId: 'asd2389huif3',
                             avatarSrc: 'asdasdassdasda.com'

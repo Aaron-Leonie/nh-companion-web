@@ -1,8 +1,11 @@
+
+
 .eventsContainer {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     max-width: 400px;
+    margin: auto;
 }
 
 
@@ -24,4 +27,20 @@
     padding: 10px;
     text-align: center;
     max-width: 400px;
+    margin: auto;
+}
+
+.formContainer {
+    margin: 10px 10px;
+}
+
+.textArea {
+    box-sizing: border-box;
+    border: 2px solid var(--primary-background-color);
+    resize: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    outline: none;
+    margin-top: 10px;
 }

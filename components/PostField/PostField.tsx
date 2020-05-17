@@ -3,22 +3,25 @@ import {Paper, Container, makeStyles, TextareaAutosize, Avatar, Button} from '@m
 import styles from './PostField.module.css';
 import EventIcon from '@material-ui/icons/Event';
 import FlightTakeoffIcon from '@material-ui/icons/FlightTakeoff';
-import EventModal from '../EventsModal/EventModal';
+import PostModal from '../PostModal/PostModal';
 import cn from 'classnames';
 
 
 
 export default function PostField() {
 
-    const [event, setEvent] = useState(false);
+    const [modal, setModal] = useState({
+        open: false,
+        type: '',
+    });
 
 
-    const handleEventsClick = () => {
-        return setEvent(true);
+    const handleModalClick = (type: string) => {
+        return setModal({type, open: !modal.open});
     };
 
-    const handleEventClose = () => {
-        return setEvent(false);
+    const handleModalClose = () => {
+        return setModal({...modal, open: false});
     };
 
 
@@ -36,7 +39,7 @@ export default function PostField() {
                                 variant="text"
                                 color="primary"
                                 startIcon={<EventIcon/>}
-                                onClick={handleEventsClick}
+                                onClick={() => handleModalClick('event')}
                             >
                                 Events
                             </Button>
@@ -49,12 +52,13 @@ export default function PostField() {
                                 variant="text"
                                 color="primary"
                                 startIcon={ <FlightTakeoffIcon/>}
+                                onClick={() => handleModalClick('flight')}
                             >
                                 Open Flights
                             </Button>
                         </div>
                     </div>
-                    <EventModal open={event} onClose={handleEventClose}/>
+                    <PostModal open={modal.open} type={modal.type} onClose={handleModalClose}/>
             </div>
     );
 };

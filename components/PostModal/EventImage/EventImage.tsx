@@ -41,6 +41,7 @@ const EventImage = (props) => {
                 alt={props.alt} 
                 className={imgStyles} 
                 onClick={() => props.onClick(props.event)}
+                draggable="false"
             />
         </div>
     )

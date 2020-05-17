@@ -1,9 +1,18 @@
-import React from 'react';
 import { createMuiTheme } from '@material-ui/core/styles';
-import { ThemeProvider } from '@material-ui/styles';
-import { purple } from '@material-ui/core/colors';
 
 export const DefaultTheme = createMuiTheme({
+    overrides: {
+        MuiFormLabel: {
+            root: {
+                color: '#148AA8',
+            }
+        },
+        MuiTextField: {
+            root: {
+                color: '#148AA8', 
+            },
+        }
+    },
     palette: {
         primary: {
             light: '#1F8FAC',
@@ -20,6 +29,11 @@ export const DefaultTheme = createMuiTheme({
             main: '#E1B137',
             dark: '#B89432',
 
+        },
+        text: {
+            primary: '#148AA8',
+            secondary: '#68AD19',
+            disabled: '#EEF7FF',
         },
   },
   typography: {

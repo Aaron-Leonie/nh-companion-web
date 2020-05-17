@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
-import { Container, Paper, TextField, Button } from '@material-ui/core'
+import { Paper, TextField, Button, FormGroup } from '@material-ui/core'
 import { Auth } from '../../firebase';
 import styles from './SignUpForm.module.css';
 import SimpleDialog from '../SimpleDialog/SimpleDialog';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 interface FormState {
     email: string,
@@ -124,11 +125,10 @@ const SignUpForm = () => {
 
     return (
         <Paper className={styles.paper}>
-            <h1>Sign Up</h1>
-            <form className={styles.signInForm}>
+            <h2>Create an Account</h2>
+            <FormGroup className={styles.signInForm}>
                 <TextField 
                     className={styles.textInputs} 
-                    id="standard-basic" 
                     label="Email" 
                     required 
                     placeholder="Email"
@@ -136,24 +136,29 @@ const SignUpForm = () => {
                     name="email"
                     error={form.errors.email}
                     helperText={!form.errors.email ? '' : 'Enter a valid email'}
+                    color="primary"
+                    variant="outlined"
+                    margin="normal"
                 />
                 <TextField 
                     type="password"
                     className={styles.textInputs} 
-                    id="standard-basic" 
-                    label="Password" 
+                    label="Password"
+                    inputProps={{color: "primary"}}
                     required 
                     placeholder="Password"
                     name="password"
                     onChange={handleChange} 
                     error={form.errors.password}
                     helperText={!form.errors.password ? '' : 'Must be 8 characters'}
+                    color="primary"
+                    variant="outlined"
+                    margin="normal"
                 />
 
                 <TextField 
                     type="password"
                     className={styles.textInputs} 
-                    id="standard-basic"
                     label="Confirm Password"
                     required
                     placeholder="Password"
@@ -161,17 +166,33 @@ const SignUpForm = () => {
                     onChange={handleChange}
                     error={form.errors.confirmPassword}
                     helperText={!form.confirmPassword ? '' : 'Password must match'}
+                    color="primary"
+                    variant="outlined"
+                    margin="normal"
                 />
 
-                <Button className={styles.submit}
-                    variant="contained" 
-                    color="primary" 
-                    disabled={!isValid}
-                    onClick={handleSignUp}
-                >
-                    Sign In
-                </Button>
-            </form>
+                {/* TODO: Dirty */}
+                <div style={{marginTop: 20, marginBottom: 20, width: '100%'}}>
+                    <Button className={styles.submit}
+                        variant="contained" 
+                        color="primary" 
+                        disabled={!isValid}
+                        onClick={handleSignUp}
+                    >
+                        Continue
+                    </Button>
+                </div>
+            </FormGroup>
+            <div className={styles.signInContainer}>
+                <span>Already have an account?</span>
+                <div style={{marginTop: 10}}>
+                    <Link href="/sign-in" as={`/sign-in`}>
+                        <Button variant="outlined" color="secondary" >
+                            Sign In
+                        </Button>
+                    </Link>
+                </div>
+            </div>
             <SimpleDialog 
                 open={form.dialog.opened}
                 title={form.dialog.title}
