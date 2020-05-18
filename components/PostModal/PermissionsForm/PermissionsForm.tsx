@@ -41,6 +41,7 @@ const PermissionsForm = (props) => {
                 style={{maxWidth: 200}}
                 color="primary"
                 variant="outlined"
+                autoComplete="off"
                 />
         );
     }

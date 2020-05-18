@@ -20,6 +20,9 @@ const useStyles = makeStyles({
     },
     buttonSelected:{
         color: '#ffffff !IMPORTANT'
+    },
+    actionIcon:{
+        color: '#5BADC2'
     }
   });
 
@@ -61,11 +64,11 @@ const BottomNav = () => {
 
     return (
         <BottomNavigation value={value} onChange={handleChange} className={classes.root}>
-            <BottomNavigationAction classes={{selected: classes.buttonSelected}} label="Feed" value="Feed" icon={<ListIcon/>}/>
-            <BottomNavigationAction classes={{selected: classes.buttonSelected}} label="Tasks" value="Tasks" icon={<TodayIcon />} />
-            <BottomNavigationAction classes={{selected: classes.buttonSelected}} label="Bugs" value="Bugs" icon={<EmojiNatureIcon />}/>
-            <BottomNavigationAction classes={{selected: classes.buttonSelected}} label="Turnips" value="Turnips" icon={<BeetsIcon />}/>
-            <BottomNavigationAction classes={{selected: classes.buttonSelected}} label="Settings" value="Settings" icon={<SettingsIcon />}/>
+            <BottomNavigationAction classes={{selected: classes.buttonSelected, root: classes.actionIcon}} label="Feed" value="Feed" icon={<ListIcon/>}/>
+            <BottomNavigationAction classes={{selected: classes.buttonSelected, root: classes.actionIcon}} label="Tasks" value="Tasks" icon={<TodayIcon />} />
+            <BottomNavigationAction classes={{selected: classes.buttonSelected, root: classes.actionIcon}} label="Bugs" value="Bugs" icon={<EmojiNatureIcon />}/>
+            <BottomNavigationAction classes={{selected: classes.buttonSelected, root: classes.actionIcon}} label="Turnips" value="Turnips" icon={<BeetsIcon />}/>
+            <BottomNavigationAction classes={{selected: classes.buttonSelected, root: classes.actionIcon}} label="Settings" value="Settings" icon={<SettingsIcon />}/>
         </BottomNavigation>
     );
 }
