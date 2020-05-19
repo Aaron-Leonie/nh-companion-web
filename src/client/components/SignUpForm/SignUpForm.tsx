@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { Paper, TextField, Button, FormGroup } from '@material-ui/core'
-import { Auth } from '../../firebase';
+import { Auth } from '../../../../firebase';
 import styles from './SignUpForm.module.css';
 import SimpleDialog from '../SimpleDialog/SimpleDialog';
 import { useRouter } from 'next/router';

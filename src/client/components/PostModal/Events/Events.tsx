@@ -1,6 +1,6 @@
 import React from 'react';
 import EventImage from '../EventImage/EventImage';
-import eventDirectory from '../../../public/images/event_images/event-images.json';
+import eventDirectory from '../../../../../public/images/event_images/event-images.json';
 import {DialogActions, Button} from '@material-ui/core';
 import styles from './Events.module.css';
 import cn from 'classnames';

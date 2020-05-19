@@ -1,5 +1,5 @@
 import React, {useContext, useEffect} from 'react';
-import { Auth } from '../firebase';
+import { Auth } from '../../../firebase';
 import { withAuth, UserConext  } from '../providers/AuthProvider';
 import { useRouter } from 'next/router';
 import { makeStyles } from '@material-ui/core';

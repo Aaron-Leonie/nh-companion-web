@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles, createStyles, AppBar, Toolbar, IconButton, Typography, Button } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
-import { Auth } from '../../firebase';
+import { Auth } from '../../../../firebase';
 import { useRouter } from 'next/router';
 import { DefaultTheme } from '../../themes/DefaultTheme';
 

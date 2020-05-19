@@ -1,6 +1,6 @@
 import React from 'react';
 import router from 'next/router';
-import { Auth } from '../firebase';
+import { Auth } from '../../../firebase';
 
 interface AuthState {
   status: string,

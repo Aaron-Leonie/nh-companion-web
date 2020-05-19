@@ -13,9 +13,9 @@ html {
     background-color: #EEF7FF;
 }
 
-.card{
+.card {
     background-color: #ffffff;
-    opacity: 95%;
+    opacity: 0.95;
 }
 
 textarea {

@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { Container, Paper, TextField, Button, Dialog, DialogTitle, makeStyles, DialogContentText, DialogContent } from '@material-ui/core'
-import { Auth } from '../../firebase';
+import { Auth } from '../../../../firebase';
 import SimpleDialog from '../SimpleDialog/SimpleDialog'
 import styles from './signin.module.css';
 import { useRouter } from 'next/router';

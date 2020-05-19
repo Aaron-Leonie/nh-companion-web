@@ -6,7 +6,17 @@
     "dev": "next dev",
     "tslint": "tslint -p . -c tslint.json",
     "build": "next build",
-    "start": "next start"
+    "start": "next start src/client",
+    "dev:client": "next src/client",
+    "dev:server": "babel src/server --out-dir dist/server --source-maps --watch",
+    "devnew": "npm run dev:client & npm run dev:server",
+    "build:client": "next build src/client",
+    "build:server": "babel src/server --out-dir dist/server --source-maps",
+    "buildnew": "npm run build:client && npm run build:server",
+    "preserve": "npm run buildnew",
+    "serve": "cross-env NODE_ENV=production firebase serve --only functions,hosting",
+    "predeploy": "rimraf dist/ && npm run buildnew",
+    "deploy": "cross-env NODE_ENV=production firebase deploy --only functions,hosting"
   },
   "dependencies": {
     "@material-ui/core": "^4.9.11",
@@ -14,16 +24,27 @@
     "@svgr/webpack": "^5.4.0",
     "classnames": "^2.2.6",
     "firebase": "^7.14.2",
-    "next": "9.3.5",
+    "firebase-admin": "^8.12.1",
+    "firebase-functions": "^3.6.1",
+    "next": "9.4.1",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "style-loader": "^1.2.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.6",
+    "@babel/preset-env": "^7.9.6",
     "@types/classnames": "^2.2.10",
     "@types/node": "^13.13.2",
     "@types/react": "^16.9.34",
+    "cross-env": "^7.0.2",
     "css-loader": "^3.5.3",
+    "rimraf": "^3.0.2",
     "typescript": "^3.8.3"
+  },
+  "main": "dist/server/index.js",
+  "engines": {
+    "node": "10"
   }
 }
