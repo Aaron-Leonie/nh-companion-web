@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
 import { Container, Paper, TextField, Button, Dialog, DialogTitle, makeStyles, DialogContentText, DialogContent } from '@material-ui/core'
-import { Auth } from '../../../../firebase';
 import SimpleDialog from '../SimpleDialog/SimpleDialog'
 import styles from './signin.module.css';
 import { useRouter } from 'next/router';
 import { useMutation } from '@apollo/react-hooks';
 import { gql } from 'apollo-boost';
+import { login } from '../../lib/auth';
 
 interface FormState {
     email: string,
@@ -98,8 +98,7 @@ const SignInForm = () => {
 
             signIn({ variables: {input: {email: form.email, password: form.password}}})
                 .then(r => {
-                    console.log(r.data.login.userId);
-                    console.log(data.login.userId);
+                    login(data.login.token);
                 })
                 .catch( e => {
                     console.log(e);

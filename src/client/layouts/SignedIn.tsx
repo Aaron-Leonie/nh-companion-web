@@ -5,6 +5,7 @@ import TopBar from '../components/TopBar/TopBar';
 import { withAuth } from '../providers/AuthProvider';
 import { withStyles } from '@material-ui/styles';
 import cssStlyes from './SignedIn.module.css';
+import { withAuthSync } from '../providers/Auth';
 
 
 const styles = theme => ({
@@ -42,4 +43,4 @@ const SingedIn = (props) => {
 
 }
 
-export default withStyles(styles)(withAuth(SingedIn));
+export default withStyles(styles)(withAuthSync(SingedIn));
