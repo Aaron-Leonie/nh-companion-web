@@ -22,3 +22,8 @@ export const login = (token) => {
     cookie.set('token', token);
     Router.push('/feed');
 }
+
+export const logout = () => {
+  cookie.remove('token');
+  Router.push('/sign-in');
+}

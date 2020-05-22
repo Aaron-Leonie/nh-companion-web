@@ -1,9 +1,8 @@
 import React from 'react';
 import { makeStyles, createStyles, AppBar, Toolbar, IconButton, Typography, Button } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
-import { Auth } from '../../../../firebase';
 import { useRouter } from 'next/router';
-import { DefaultTheme } from '../../themes/DefaultTheme';
+import { logout } from '../../lib/auth';
 
 
 
@@ -25,15 +24,6 @@ const TopBar = (props) => {
         props.openDrawer();
     };
 
-    const logOut = () => {
-      Auth.signOut()
-        .then(() => {
-          router.push('/sign-in');
-        })
-        .catch(() => {
-          console.log('Error signing out');
-        });
-    };
 
     return (
         <AppBar position="fixed" color="primary">
@@ -44,7 +34,7 @@ const TopBar = (props) => {
           <Typography variant="h6" className={classes.title}>
             NH Companion
           </Typography>
-          <Button color="inherit" onClick={logOut}>Logout</Button>
+          <Button color="inherit" onClick={logout}>Logout</Button>
         </Toolbar>
       </AppBar>
     );

@@ -1,6 +1,6 @@
 import React, {useContext, useEffect} from 'react';
 import { Auth } from '../../../firebase';
-import { withAuth, UserConext  } from '../providers/AuthProvider';
+import { withAuthSync } from '../providers/Auth';
 import { useRouter } from 'next/router';
 import { makeStyles } from '@material-ui/core';
 import SignedIn from '../layouts/SignedIn';
@@ -27,8 +27,6 @@ const useStyles = makeStyles({
 const dashboard = (props) => {
     const classes = useStyles();
     const router = useRouter();
-    const user = useContext(UserConext);
-    console.log(user);
 
     const handleSignOut = (e) => {
         router.push('/sign-in');
@@ -147,4 +145,4 @@ const dashboard = (props) => {
 }
 
 
-export default withAuth(dashboard);
+export default withAuthSync(dashboard);

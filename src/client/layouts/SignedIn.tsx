@@ -2,7 +2,6 @@ import React, {useState, useContext} from 'react';
 import BottomNav from '../components/BottomNav/BottomNav';
 import DrawerNav from '../components/DrawerNav/DrawerNav';
 import TopBar from '../components/TopBar/TopBar';
-import { withAuth } from '../providers/AuthProvider';
 import { withStyles } from '@material-ui/styles';
 import cssStlyes from './SignedIn.module.css';
 import { withAuthSync } from '../providers/Auth';

@@ -80,24 +80,9 @@ const SignInForm = () => {
         e.preventDefault();
         
         if (isValid) {
-            // Auth.signInWithEmailAndPassword(form.email, form.password)
-            // .then(()=> {
-            //     router.push('/feed');
-
-
-            // })
-            // .catch((e) => {
-            //     setform({
-            //         ...form, 
-            //         password: '', 
-            //         email: '', 
-            //         dialogOpen: true, 
-            //         apiErrorMessage:'Email and password invalid.' 
-            //     });
-            // });
-
             signIn({ variables: {input: {email: form.email, password: form.password}}})
-                .then(r => {
+                .then( r => {
+                    console.log(typeof(login));
                     login(data.login.token);
                 })
                 .catch( e => {

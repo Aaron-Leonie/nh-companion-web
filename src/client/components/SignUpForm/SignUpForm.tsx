@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
 import { Paper, TextField, Button, FormGroup } from '@material-ui/core'
-import { Auth } from '../../../../firebase';
 import styles from './SignUpForm.module.css';
 import SimpleDialog from '../SimpleDialog/SimpleDialog';
 import { useRouter } from 'next/router';
+import { gql } from 'apollo-boost';
+import { useMutation } from '@apollo/react-hooks';
 import Link from 'next/link';
 
 interface FormState {
@@ -22,9 +23,19 @@ interface FormState {
     }
 }
 
+const SIGN_UP = gql`
+mutation SignUp($input: NewUserInput!) {
+    createUser(input: $input){
+        userId
+    }
+}
+`;
+
 
 const SignUpForm = () => {
     const router = useRouter();
+
+    const [signUp , { data }] = useMutation(SIGN_UP);
 
     const [form, setform] = useState({
         email: '', 
@@ -85,7 +96,8 @@ const SignUpForm = () => {
         e.preventDefault();
 
         if(isValid) {
-            Auth.createUserWithEmailAndPassword(form.email, form.password)
+            signUp({variables: {input: {email: form.email, password: form.password}}})
+            // Auth.createUserWithEmailAndPassword(form.email, form.password)
             .then(()=> {
                 router.push('/');
             })
