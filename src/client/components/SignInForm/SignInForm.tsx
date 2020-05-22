@@ -4,6 +4,8 @@ import { Auth } from '../../../../firebase';
 import SimpleDialog from '../SimpleDialog/SimpleDialog'
 import styles from './signin.module.css';
 import { useRouter } from 'next/router';
+import { useMutation } from '@apollo/react-hooks';
+import { gql } from 'apollo-boost';
 
 interface FormState {
     email: string,
@@ -16,9 +18,20 @@ interface FormState {
     dialogOpen: boolean
 };
 
+const SIGN_IN = gql`
+mutation SignIn($input: LoginInput!){
+    login(input: $input){
+        userId,
+        token
+    }
+}
+`;
+
+
 
 const SignInForm = () => {
     const router = useRouter();
+    const [signIn , { data }] = useMutation(SIGN_IN);
 
     const [form, setform] = useState({
         email: '', 
@@ -67,19 +80,30 @@ const SignInForm = () => {
         e.preventDefault();
         
         if (isValid) {
-            Auth.signInWithEmailAndPassword(form.email, form.password)
-            .then(()=> {
-                router.push('/feed');
-            })
-            .catch((e) => {
-                setform({
-                    ...form, 
-                    password: '', 
-                    email: '', 
-                    dialogOpen: true, 
-                    apiErrorMessage:'Email and password invalid.' 
+            // Auth.signInWithEmailAndPassword(form.email, form.password)
+            // .then(()=> {
+            //     router.push('/feed');
+
+
+            // })
+            // .catch((e) => {
+            //     setform({
+            //         ...form, 
+            //         password: '', 
+            //         email: '', 
+            //         dialogOpen: true, 
+            //         apiErrorMessage:'Email and password invalid.' 
+            //     });
+            // });
+
+            signIn({ variables: {input: {email: form.email, password: form.password}}})
+                .then(r => {
+                    console.log(r.data.login.userId);
+                    console.log(data.login.userId);
+                })
+                .catch( e => {
+                    console.log(e);
                 });
-            });
         } else {
             setform({...form, dialogOpen: true, apiErrorMessage:'Email and password invalid.'});
         }
