@@ -82,8 +82,7 @@ const SignInForm = () => {
         if (isValid) {
             signIn({ variables: {input: {email: form.email, password: form.password}}})
                 .then( r => {
-                    console.log(typeof(login));
-                    login(data.login.token);
+                    login(r.data.login.token);
                 })
                 .catch( e => {
                     console.log(e);
