@@ -1,5 +1,4 @@
-import React, {useContext, useEffect} from 'react';
-import { Auth } from '../../../firebase';
+import React from 'react';
 import { withAuthSync } from '../providers/Auth';
 import { useRouter } from 'next/router';
 import { makeStyles } from '@material-ui/core';
@@ -27,11 +26,6 @@ const useStyles = makeStyles({
 const dashboard = (props) => {
     const classes = useStyles();
     const router = useRouter();
-
-    const handleSignOut = (e) => {
-        router.push('/sign-in');
-        Auth.signOut();
-    };
 
     return (
         <SignedIn>

@@ -6,13 +6,13 @@ export const auth = ctx => {
   const { token } = nextCookie(ctx)
 
   if (ctx.req && !token) {
-    ctx.res.writeHead(302, { Location: '/login' })
+    ctx.res.writeHead(302, { Location: '/sign-in' })
     ctx.res.end()
     return
   }
 
   if (!token) {
-    Router.push('/login')
+    Router.push('/sign-in')
   }
 
   return token
