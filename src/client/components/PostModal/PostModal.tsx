@@ -34,8 +34,9 @@ const EventModal = (props) => {
     };
 
     // Event Publish handler
-    const handlePublishClick = () => {
-        return;
+    // Lifting state here
+    const handlePublishClick = (postBody: string) => {
+        return props.handlePublishClick(props.type, event, eventPermissions, dodoCode, postBody);
     };
 
     // Modal Step handler

@@ -6,9 +6,7 @@ import FlightTakeoffIcon from '@material-ui/icons/FlightTakeoff';
 import PostModal from '../PostModal/PostModal';
 import cn from 'classnames';
 
-
-
-export default function PostField() {
+export default function PostField(props) {
 
     const [modal, setModal] = useState({
         open: false,
@@ -24,12 +22,20 @@ export default function PostField() {
         return setModal({...modal, open: false});
     };
 
+    const handleTextChange = (e) => {
+        return props.handleTextChange(e.target.value);
+    }
+
+    const handleDialoguePublishClick = (type, event, eventPermissions, dodoCode, postBody) => {
+        return props.handleDialoguePublishClick(type, event, eventPermissions, dodoCode, postBody);
+    }
+
 
     return (
             <div className={cn(styles.fieldContainer, 'card')}>
                 <div className={styles.inputContainer}>
                     <Avatar className={styles.avatar}>AH</Avatar>
-                    <TextareaAutosize className={styles.textArea} rowsMax={3} placeholder="Write a post!" />
+                    <TextareaAutosize className={styles.textArea} rowsMax={3} placeholder="Write a post!" onChange={handleTextChange} />
                 </div>
                 <div className={styles.buttonContainer}>
                         <div id="events" className={cn(styles.statusButton, styles.buttonLeft)}>
@@ -58,7 +64,12 @@ export default function PostField() {
                             </Button>
                         </div>
                     </div>
-                    <PostModal open={modal.open} type={modal.type} onClose={handleModalClose}/>
+                    <PostModal 
+                        open={modal.open} 
+                        type={modal.type} 
+                        onClose={handleModalClose}
+                        handlePublishClick={handleDialoguePublishClick}
+                    />
             </div>
     );
 };

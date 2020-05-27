@@ -2,6 +2,8 @@ import React from 'react';
 import { withAuthSync } from '../providers/Auth';
 import { useRouter } from 'next/router';
 import { makeStyles } from '@material-ui/core';
+import { gql } from 'apollo-boost';
+import { useMutation } from '@apollo/react-hooks';
 import SignedIn from '../layouts/SignedIn';
 import PostField from '../components/PostField/PostField';
 import Post from '../components/Post/Post';
@@ -23,9 +25,62 @@ const useStyles = makeStyles({
     }
 });
 
+const CREATE_POST = gql`
+mutation CreatePost($post: NewPost!) {
+    createPost(newPost: $post) {
+        postId,
+        user {
+            userId,
+            avatarUrl,
+            islandName,
+            userName
+        },
+        postType,
+        textBody {
+            body
+        },
+        eventBody {
+            eventTitle,
+            body,
+            inviteStatus
+        }
+    }
+}
+`;
+
 const dashboard = (props) => {
     const classes = useStyles();
     const router = useRouter();
+
+    const [createPost, { data }] = useMutation(CREATE_POST);
+
+    // TODO create event for Open Flights 
+    const handleDialoguePublishClick = (type, event, eventPermissions, dodoCode, postBody) => {
+        let inviteStatus: string;
+        if (dodoCode) {
+            inviteStatus = `Dodo Code: ${dodoCode}`;
+        } else {
+            inviteStatus = eventPermissions;
+        }
+        
+        const newPost = {
+            postType: 'event',
+            eventBody: {
+                // TODO Append user Island Name to event message
+                eventTitle: event.eventMessage,
+                body: postBody,
+                inviteStatus,
+            },
+        };
+
+        return createPost({variables: { post: { ...newPost } } })
+            .then(() => {
+                console.log('Sucess');
+            })
+            .catch((e) => {
+                console.log(e);
+            });
+    };
 
     return (
         <SignedIn>
@@ -34,7 +89,7 @@ const dashboard = (props) => {
             </Head>
             <div className={classes.parentPageContents}>
                 <div className={classes.pageContents}>
-                    <PostField />
+                    <PostField handleDialoguePublishClick={handleDialoguePublishClick}/>
                     <Post 
                         type="text"
                         postHeader={{

@@ -8,6 +8,8 @@ import styles from './PermissionsForm.module.css';
 
 const PermissionsForm = (props) => {
 
+    const [postBody, setPostBody] = useState('');
+
      // Validation declaratisons
      const dodoValidation = new RegExp('^([A-Z0-9]{5})');
 
@@ -46,6 +48,10 @@ const PermissionsForm = (props) => {
         );
     }
 
+    const handlePublishClick = () => {
+        return props.handlePublishClick(postBody);
+    };
+
     return (
         <div>
             <FormGroup className={styles.formContainer} >
@@ -55,11 +61,11 @@ const PermissionsForm = (props) => {
                     <FormControlLabel value="dodoCode" control={<Radio color="primary"/>} label="Dodo Code" />
                 </RadioGroup>
                 {dodoCodeField}
-                <TextareaAutosize className={styles.textArea} rowsMax={4} rows={4} placeholder="Include message..." ></TextareaAutosize>
+                <TextareaAutosize className={styles.textArea} rowsMax={4} rows={4} placeholder="Include message..." onChange={(e) => setPostBody(e.target.value)}></TextareaAutosize>
             </FormGroup>
             <DialogActions>
                 <Button onClick={props.handleClose} color="secondary">Cancel</Button>
-                <Button onClick={props.handlePublishClick} color="primary">Publish</Button>
+                <Button onClick={handlePublishClick} color="primary">Publish</Button>
             </DialogActions>
         </div>
     );
