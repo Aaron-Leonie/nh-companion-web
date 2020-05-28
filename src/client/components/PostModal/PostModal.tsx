@@ -5,13 +5,16 @@ import PermissionsForm from './PermissionsForm/PermissionsForm';
 
 
 interface EventState {
+    eventId: number,
     fileName: string,
     eventName: string,
     eventMessage: string,
     eventUserMessage: string
 }
 
-// TODO props interface
+// TODO: props interface
+// TODO: Lift extra state to feed. Would simplify code and allow for 
+// managment of state where the request is being made so I can clear the modal
 
 const EventModal = (props) => {
 
@@ -36,6 +39,10 @@ const EventModal = (props) => {
     // Event Publish handler
     // Lifting state here
     const handlePublishClick = (postBody: string) => {
+        setEvent({} as EventState);
+        setEventPermissions('frieds');
+        setDodoCode('');
+        setStep(1);
         return props.handlePublishClick(props.type, event, eventPermissions, dodoCode, postBody);
     };
 

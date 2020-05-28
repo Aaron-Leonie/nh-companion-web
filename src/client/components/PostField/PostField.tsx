@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import {Paper, Container, makeStyles, TextareaAutosize, Avatar, Button} from '@material-ui/core'
+import { TextareaAutosize, Avatar, Button} from '@material-ui/core'
 import styles from './PostField.module.css';
 import EventIcon from '@material-ui/icons/Event';
 import FlightTakeoffIcon from '@material-ui/icons/FlightTakeoff';
@@ -9,33 +9,42 @@ import cn from 'classnames';
 export default function PostField(props) {
 
     const [modal, setModal] = useState({
-        open: false,
         type: '',
     });
 
 
+
     const handleModalClick = (type: string) => {
-        return setModal({type, open: !modal.open});
+        setModal({ type });
+        return props.handleModalClick();
+
     };
 
     const handleModalClose = () => {
-        return setModal({...modal, open: false});
+        return props.handleModalClose();
     };
 
     const handleTextChange = (e) => {
-        return props.handleTextChange(e.target.value);
+        props.handleTextChange(e.target.value);
     }
 
+    // Lifting state to Feed page
     const handleDialoguePublishClick = (type, event, eventPermissions, dodoCode, postBody) => {
         return props.handleDialoguePublishClick(type, event, eventPermissions, dodoCode, postBody);
     }
 
+    const handleTextPostPublishClick = () => {
+        return handleDialoguePublishClick('text', null, null, null, props.postText);
+    };
 
+
+    // TODO: find a better way of clearing the text area. Too many dom rerenders.
     return (
             <div className={cn(styles.fieldContainer, 'card')}>
                 <div className={styles.inputContainer}>
                     <Avatar className={styles.avatar}>AH</Avatar>
-                    <TextareaAutosize className={styles.textArea} rowsMax={3} placeholder="Write a post!" onChange={handleTextChange} />
+                    <TextareaAutosize className={styles.textArea} rowsMax={3} placeholder="Write a post!" onChange={handleTextChange} value={props.postText} />
+                    <Button style={{margin: 10}} color="primary" variant="contained" onClick={handleTextPostPublishClick}>Publish</Button>
                 </div>
                 <div className={styles.buttonContainer}>
                         <div id="events" className={cn(styles.statusButton, styles.buttonLeft)}>
@@ -49,8 +58,6 @@ export default function PostField(props) {
                             >
                                 Events
                             </Button>
-
-                            {/* <EventIcon/> Events */}
                         </div>
                         <div id="flights" className={cn(styles.statusButton, styles.buttonRight)}>
                             <Button
@@ -65,8 +72,8 @@ export default function PostField(props) {
                         </div>
                     </div>
                     <PostModal 
-                        open={modal.open} 
-                        type={modal.type} 
+                        open={props.open} 
+                        type={modal.type}
                         onClose={handleModalClose}
                         handlePublishClick={handleDialoguePublishClick}
                     />

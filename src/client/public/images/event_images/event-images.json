@@ -1,6 +1,7 @@
 {
     "images": [
         {
+            "eventId": 1,
             "fileName": "/images/event_images/celeste-img.png",
             "eventName": "Celeste",
             "eventMessage": "Celeste is stargazing at ",
@@ -8,6 +9,7 @@
         },
 
         {
+            "eventId": 2,
             "fileName": "/images/event_images/crafting-img.png",
             "eventName": "Villager Crafting",
             "eventMessage": "Villager is crafting at ",
@@ -15,6 +17,7 @@
         },
 
         {
+            "eventId": 3,
             "fileName": "/images/event_images/in-boxes-img.png",
             "eventName": "Villager in Boxes",
             "eventMessage": "Villager in boxes at ",
@@ -22,6 +25,7 @@
         },
 
         {
+            "eventId": 4,
             "fileName": "/images/event_images/kicks-img.png",
             "eventName": "Kicks",
             "eventMessage": "Kicks is selling at ",
@@ -29,6 +33,7 @@
         },
 
         {
+            "eventId": 5,
             "fileName": "/images/event_images/leif-img.png",
             "eventName": "Leif",
             "eventMessage": "Leif is selling at ",
@@ -36,6 +41,7 @@
         },
 
         {
+            "eventId": 6,
             "fileName": "/images/event_images/meteors-img.png",
             "eventName": "Meteors",
             "eventMessage": "Wish on shooting stars at ",
@@ -43,6 +49,7 @@
         },
 
         {
+            "eventId": 7,
             "fileName": "/images/event_images/rain-img.png",
             "eventName": "Rain",
             "eventMessage": "It's raining on ",
@@ -50,6 +57,7 @@
         },
 
         {
+            "eventId": 8,
             "fileName": "/images/event_images/redd-img.png",
             "eventName": "Redd",
             "eventMessage": "Redd's Treasure Trawler has docked at ",
@@ -57,6 +65,7 @@
         },
 
         {
+            "eventId": 9,
             "fileName": "/images/event_images/saharah-img.png",
             "eventName": "Saharah",
             "eventMessage": "Saharah is selling at ",
@@ -64,6 +73,7 @@
         },
 
         {
+            "eventId": 10,
             "fileName": "/images/event_images/turnip-buying-img.png",
             "eventName": "Daisy Mae",
             "eventMessage": "Buy from Daisy Mae's stalk market at ",
@@ -71,6 +81,7 @@
         },
 
         {
+            "eventId": 11,
             "fileName": "/images/event_images/turnip-selling-img.png",
             "eventName": "Sell Turnips",
             "eventMessage": "The Nooklings are buying turnips at ",
@@ -78,6 +89,7 @@
         },
 
         {
+            "eventId": 12,
             "fileName": "/images/event_images/water-flowers-img.png",
             "eventName": "Water Flowers",
             "eventMessage": "Come water flowers at ",
@@ -85,9 +97,10 @@
         },
 
         {
+            "eventId": 13,
             "fileName": "/images/event_images/open-flights-img.png",
             "eventName": "Open Flights",
-            "eventMessage": "'s flights are open!'",
+            "eventMessage": "Flights are now open for ",
             "eventUserMessage": "You want to open flights to your island."
         }
     ]

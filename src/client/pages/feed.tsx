@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState }from 'react';
 import { withAuthSync } from '../providers/Auth';
 import { useRouter } from 'next/router';
 import { makeStyles } from '@material-ui/core';
@@ -40,10 +40,12 @@ mutation CreatePost($post: NewPost!) {
             body
         },
         eventBody {
+            eventId,
             eventTitle,
             body,
             inviteStatus
         }
+        createdAt
     }
 }
 `;
@@ -53,33 +55,65 @@ const dashboard = (props) => {
     const router = useRouter();
 
     const [createPost, { data }] = useMutation(CREATE_POST);
+    const [modal, setModal] = useState(false);
+    const [postText, setPostText] = useState('');
 
     // TODO create event for Open Flights 
+    // @param type: string of either flight, event, text
     const handleDialoguePublishClick = (type, event, eventPermissions, dodoCode, postBody) => {
-        let inviteStatus: string;
-        if (dodoCode) {
-            inviteStatus = `Dodo Code: ${dodoCode}`;
-        } else {
-            inviteStatus = eventPermissions;
-        }
         
-        const newPost = {
-            postType: 'event',
-            eventBody: {
-                // TODO Append user Island Name to event message
-                eventTitle: event.eventMessage,
-                body: postBody,
-                inviteStatus,
-            },
-        };
+        console.log(event);
+        let newPost;
+
+        if(type === 'text') {
+            newPost = {
+                postType: 'text',
+                textBody: {
+                    body: postBody,
+                },
+            };
+        } else {
+            let inviteStatus: string;
+            if (dodoCode) {
+                inviteStatus = `Dodo Code: ${dodoCode}`;
+            } else {
+                inviteStatus = eventPermissions;
+            }
+            
+            newPost = {
+                postType: 'event',
+                eventBody: {
+                    // TODO Append user Island Name to event message
+                    eventId: event.eventId,
+                    // TODO: make flight message is coming from the image manifest
+                    eventTitle: (type === 'event') ? event.eventMessage : 'Fights are now open my island!',
+                    body: postBody,
+                    inviteStatus,
+                },
+            };
+        }
 
         return createPost({variables: { post: { ...newPost } } })
-            .then(() => {
-                console.log('Sucess');
+            .then((res) => {
+                setModal(false);
+                setPostText('');
+                console.log(res);
             })
             .catch((e) => {
                 console.log(e);
             });
+    };
+
+    const handleModalClose = () => {
+        return setModal(false);
+    }
+
+    const handleModalClick = () => {
+        return setModal(true);
+    }
+
+    const handleTextChange= (text) => {
+        return setPostText(text);
     };
 
     return (
@@ -89,7 +123,14 @@ const dashboard = (props) => {
             </Head>
             <div className={classes.parentPageContents}>
                 <div className={classes.pageContents}>
-                    <PostField handleDialoguePublishClick={handleDialoguePublishClick}/>
+                    <PostField 
+                        handleDialoguePublishClick={handleDialoguePublishClick}
+                        handleModalClose={handleModalClose}
+                        open={modal}
+                        handleModalClick={handleModalClick}
+                        handleTextChange={handleTextChange}
+                        postText={postText}
+                    />
                     <Post 
                         type="text"
                         postHeader={{

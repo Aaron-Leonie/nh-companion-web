@@ -49,3 +49,7 @@
 .buttonRight {
     border-left: solid lightgrey 1px;
 }
+
+.publishButton {
+    margin: 10px 10px;
+}
