@@ -5,14 +5,16 @@ import SimpleDialog from '../SimpleDialog/SimpleDialog';
 import { useRouter } from 'next/router';
 import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
+import { login } from '../../lib/auth';
 import Link from 'next/link';
+import axios from 'axios';
 
 interface FormState {
     email: string,
     password: string,
     confirmPassword: string,
-    avatarUpload: string,
-    avatarFileRaw: any,
+    userName: string,
+    islandName: string,
     errors: {
         email: boolean,
         password: boolean,
@@ -28,7 +30,8 @@ interface FormState {
 const SIGN_UP = gql`
 mutation SignUp($input: NewUserInput!) {
     createUser(input: $input){
-        userId
+        userId,
+        token
     }
 }
 `;
@@ -43,8 +46,8 @@ const SignUpForm = () => {
         email: '', 
         password: '', 
         confirmPassword: '',
-        avatarUpload: '',
-        avatarFileRaw: null,
+        islandName: '',
+        userName: '',
         errors: {
             email: false,
             password: false,
@@ -102,17 +105,32 @@ const SignUpForm = () => {
         e.preventDefault();
 
         if(isValid) {
-            signUp({variables: {input: {email: form.email, password: form.password}}})
-            // Auth.createUserWithEmailAndPassword(form.email, form.password)
-            .then(()=> {
-                router.push('/');
+            signUp({variables: {input: {
+                email: form.email, 
+                password: form.password,
+                userName: form.userName,
+                islandName: form.islandName,
+            }}})
+            .then((res)=> {
+                console.log(res);
+                if (avatar.raw !== undefined) {
+                    const avatarPayload = new FormData();
+                    avatarPayload.set('avatar', avatar.raw)
+                    axios({
+                        method: 'POST',
+                        url: 'http://localhost:3001/upload/avatar',
+                        headers: {'Authorization': `Bearer ${res.data.createUser.token}`, 'Content-Type': 'multipart/form-data; boundary=<calculated when request is sent>'},
+                        data: avatarPayload, 
+                    }).then(result => console.log(result)).catch(e => console.log(e));
+                }
+                login(res.data.createUser.token);
             })
             .catch((e) => {
                 setform({
                     ...form,
                     dialog: {
                         opened: true,
-                        message: 'Please try again later.',
+                        message: e.message? e.message.replace('GraphQL error: ', '') : 'Please try again later.',
                         title: 'Error Signing Up'
     
                     }
@@ -183,6 +201,28 @@ const SignUpForm = () => {
                     name="email"
                     error={form.errors.email}
                     helperText={!form.errors.email ? '' : 'Enter a valid email'}
+                    color="primary"
+                    variant="outlined"
+                    margin="normal"
+                />
+                <TextField 
+                    className={styles.textInputs} 
+                    label="Username" 
+                    required 
+                    placeholder="AwesomeCat"
+                    onChange={handleChange}
+                    name="userName"
+                    color="primary"
+                    variant="outlined"
+                    margin="normal"
+                />
+                <TextField 
+                    className={styles.textInputs} 
+                    label="Island Name" 
+                    required 
+                    placeholder="MyAwesomeIsland"
+                    onChange={handleChange}
+                    name="islandName"
                     color="primary"
                     variant="outlined"
                     margin="normal"
