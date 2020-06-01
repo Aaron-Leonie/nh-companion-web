@@ -1,0 +1,34 @@
+.paper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 500px;
+    padding: 50px;
+    width: 500px;
+    color: var(--primary-main-color);
+    margin: 20px 10px 0 10px;
+    width: 100%;
+}
+
+.signInForm {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.textInputs {
+    width: 100%;
+}
+
+.submit {
+    width: 100%;
+}
+
+.signInContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

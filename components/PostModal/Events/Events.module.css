@@ -1,0 +1,14 @@
+.eventsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 400px;
+    margin: auto;
+}
+
+.helperText {
+    padding: 10px;
+    text-align: center;
+    max-width: 400px;
+    margin: auto;
+}

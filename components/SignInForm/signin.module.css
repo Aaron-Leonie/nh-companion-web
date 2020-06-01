@@ -1,0 +1,32 @@
+.paper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 500px;
+    padding: 50px;
+    width: 500px;
+    
+}
+
+.signInForm {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.textInputs {
+    margin: 20px;
+    width: 300px;
+
+}
+
+.submit {
+    width: 100px;
+}
+
+.errorDialog{
+    text-align: center;
+    padding: 200px;
+}
