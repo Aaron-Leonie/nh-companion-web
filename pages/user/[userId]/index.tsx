@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import { withAuthSync } from '../../../providers/Auth';
+import { gql } from 'apollo-boost';
+import { useQuery } from '@apollo/react-hooks'
 import SignedIn from '../../../layouts/SignedIn';
 import { makeStyles } from '@material-ui/core';
+import { PublicUser } from '../../../lib/interfaces';
 import ProfileAbout from '../../../components/ProfileAbout/ProfileAbout';
 import Post from '../../../components/Post/Post';
 import Head from 'next/head';
+import ErrorPage from 'next/error'
 
 const useStyles = makeStyles({
     pageContents: {
@@ -23,25 +27,47 @@ const useStyles = makeStyles({
     }
 });
 
+const FETCH_PUBLIC_USER = gql`
+query GetPublicUser($userId: String!) {
+    getPublicUser(userId: $userId) {
+        userId,
+        avatarUrl,
+        friendCode,
+        aboutText,
+        userName,
+        islandName
+    }
+}
+`;
+
 const UserProfile = () => {
 
     const router = useRouter();
     const { userId } = router.query;
     const classes = useStyles();
-    const [state, setState] = React.useState({userId: 'asd2389huif3', userFullName: 'Aaron Hawkey'});
+    const { loading, error, data } = useQuery(FETCH_PUBLIC_USER, {variables: {userId}});
+    
+    if(error) {
+        return (<ErrorPage statusCode={404}></ErrorPage>);
+    }
+    
+    if(loading) {
+        return(<div>Loading...</div>);
+    }
 
     return (
         <SignedIn>
             <Head>
-                <title>{`${state.userFullName} - Profile`}</title>
+                <title>{`${data.getPublicUser.userName} - Profile`}</title>
             </Head>
             <div className={classes.parentPageContents}>
                 <div className={classes.pageContents}>
                     <ProfileAbout 
-                        userFullName="After Midnight"
-                        islandName="Island Name"
-                        userFriendCode="Friend Code: SW-1234-5678-9012"
-                        userAbout="This is a lot of text about me. I need lots of money. Give me all your money bitch."
+                        userFullName={data.getPublicUser.userName}
+                        islandName={data.getPublicUser.islandName}
+                        userFriendCode={`Friend Code: ${data.getPublicUser.friendCode}`}
+                        userAbout={data.getPublicUser.aboutText}
+                        avatarUrl={data.getPublicUser.avatarUrl}
                     />
                     <Post 
                         type="text"

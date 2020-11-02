@@ -9,8 +9,11 @@ import cn from 'classnames';
 export interface ProfileAboutProps {
     userFullName: string,
     islandName: string,
-    userFriendCode: string,
-    userAbout: string,
+    userFriendCode?: string,
+    userAbout?: string,
+    avatarUrl?: string,
+    avatarFallback?: string,
+
 };
 
 
@@ -18,7 +21,7 @@ const ProfileAbout = (props: ProfileAboutProps) => {
     return (
         <div className={cn(styles.aboutContainer, 'card')}>
             <div className={styles.aboutHeader}>
-                <Avatar className={styles.avatar}>AH</Avatar>
+                <Avatar className={styles.avatar} src={props.avatarUrl}>AH</Avatar>
                 <div className={styles.titleAbout}>
                     <div className={styles.nameText}>
                         <span>{props.userFullName}</span>
