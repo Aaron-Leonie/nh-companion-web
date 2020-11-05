@@ -40,3 +40,14 @@
     font-size: 12px;
     padding: 10px;
 }
+
+.textArea {
+    border: none;
+    width: 100%;
+    resize: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    outline: black solid 1px;
+    margin: 10px;
+}

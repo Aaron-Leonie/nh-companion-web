@@ -1,49 +1,122 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './ProfileAbout.module.css';
-import {Avatar, IconButton} from '@material-ui/core';
+import {Avatar, IconButton, Button, TextField, TextareaAutosize} from '@material-ui/core';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import HomeIcon from '@material-ui/icons/Home';
+import EditIcon from '@material-ui/icons/Edit';
 import InsertCommentIcon from '@material-ui/icons/InsertComment';
 import cn from 'classnames';
+import { PublicUser } from '../../lib/interfaces';
+import { getUser } from '../../lib/auth';
 
 export interface ProfileAboutProps {
-    userFullName: string,
-    islandName: string,
-    userFriendCode?: string,
-    userAbout?: string,
-    avatarUrl?: string,
-    avatarFallback?: string,
-
+    publicUser: PublicUser
 };
 
 
 const ProfileAbout = (props: ProfileAboutProps) => {
-    return (
-        <div className={cn(styles.aboutContainer, 'card')}>
-            <div className={styles.aboutHeader}>
-                <Avatar className={styles.avatar} src={props.avatarUrl}>AH</Avatar>
-                <div className={styles.titleAbout}>
-                    <div className={styles.nameText}>
-                        <span>{props.userFullName}</span>
+
+    const currentUser = getUser();
+    const [publicUser, setPublicUser] = useState(props.publicUser);
+    const [editToggle, setEditToggle] = useState(false);
+
+    // Functions
+    const handleEditClick = () => {
+        setEditToggle(!editToggle);
+    }
+
+    const handleSave = () => {
+        setEditToggle(!editToggle);
+    }
+
+
+    // Templates
+    
+    if(currentUser === props.publicUser.userId && !editToggle) {
+        return (
+            <div className={cn(styles.aboutContainer, 'card')}>
+                <div className={styles.aboutHeader}>
+                    <Avatar className={styles.avatar} src={publicUser.avatarUrl}>AH</Avatar>
+                    <div className={styles.titleAbout}>
+                        <div className={styles.nameText}>
+                            <span>{publicUser.userName}</span>
+                        </div>
+                        <div className={styles.islandName}>
+                            <span>{publicUser.islandName}</span>
+                        </div>
                     </div>
-                    <div className={styles.islandName}>
-                        <span>{props.islandName}</span>
-                    </div>
+                        <span className={styles.headerButtons}>
+                            <IconButton><PersonAddIcon /></IconButton>
+                            <IconButton><HomeIcon /></IconButton>
+                            <IconButton><InsertCommentIcon /></IconButton>
+                            <IconButton onClick={handleEditClick}><EditIcon /></IconButton>
+                        </span>
                 </div>
-                    <span className={styles.headerButtons}>
-                        <IconButton><PersonAddIcon /></IconButton>
-                        <IconButton><HomeIcon /></IconButton>
-                        <IconButton><InsertCommentIcon /></IconButton>
-                    </span>
+                <div className={styles.friendCode}>
+                    <p>{publicUser.friendCode}</p>
+                </div>
+                <div className={styles.aboutText}>
+                    <p>{publicUser.aboutText}</p>
+                </div>
             </div>
-            <div className={styles.friendCode}>
-                <p>{props.userFriendCode}</p>
+        )
+    }
+
+    if(currentUser !== props.publicUser.userId && !editToggle) {
+        return (
+            <div className={cn(styles.aboutContainer, 'card')}>
+                <div className={styles.aboutHeader}>
+                    <Avatar className={styles.avatar} src={publicUser.avatarUrl}>AH</Avatar>
+                    <div className={styles.titleAbout}>
+                        <div className={styles.nameText}>
+                            <span>{publicUser.userName}</span>
+                        </div>
+                        <div className={styles.islandName}>
+                            <span>{publicUser.islandName}</span>
+                        </div>
+                    </div>
+                        <span className={styles.headerButtons}>
+                            <IconButton><PersonAddIcon /></IconButton>
+                            <IconButton><HomeIcon /></IconButton>
+                            <IconButton><InsertCommentIcon /></IconButton>
+                        </span>
+                </div>
+                <div className={styles.friendCode}>
+                    <p>{publicUser.friendCode}</p>
+                </div>
+                <div className={styles.aboutText}>
+                    <p>{publicUser.aboutText}</p>
+                </div>
             </div>
-            <div className={styles.aboutText}>
-                <p>{props.userAbout}</p>
+        );
+    }
+
+    if (currentUser === props.publicUser.userId && editToggle) {
+        return(
+            <div className={cn(styles.aboutContainer, 'card')}>
+                <div className={styles.aboutHeader}>
+                    <Avatar className={styles.avatar} src={publicUser.avatarUrl}>AH</Avatar>
+                    <div className={styles.titleAbout}>
+                        <div className={styles.nameText}>
+                            <span>{publicUser.userName}</span>
+                        </div>
+                        <div className={styles.islandName}>
+                            <TextField id="standard-basic" label="Island Name" autoComplete="off"/>
+                        </div>
+                    </div>
+                        <span className={styles.headerButtons}>
+                            <Button variant="contained" color="primary" onClick={handleSave}>Save</Button>
+                        </span>
+                </div>
+                <div className={styles.friendCode}>
+                    <TextField id="standard-basic" label="Friend Code" autoComplete="off"/>
+                </div>
+                <div className={styles.aboutText}>
+                <TextareaAutosize className={styles.textArea} rowsMax={3} rowsMin={3} placeholder=""  />
+                </div>
             </div>
-        </div>
-    );
+        );
+    }
 };
 
 export default ProfileAbout;

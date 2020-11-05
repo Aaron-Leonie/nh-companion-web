@@ -46,28 +46,25 @@ const UserProfile = () => {
     const { userId } = router.query;
     const classes = useStyles();
     const { loading, error, data } = useQuery(FETCH_PUBLIC_USER, {variables: {userId}});
-    
+    const publicUser: PublicUser = data && data.getPublicUser;
+
     if(error) {
         return (<ErrorPage statusCode={404}></ErrorPage>);
     }
     
     if(loading) {
-        return(<div>Loading...</div>);
+        return(<SignedIn><div><p>Loading...</p></div></SignedIn>);
     }
 
     return (
         <SignedIn>
             <Head>
-                <title>{`${data.getPublicUser.userName} - Profile`}</title>
+                <title>{`${publicUser.userName} - Profile`}</title>
             </Head>
             <div className={classes.parentPageContents}>
                 <div className={classes.pageContents}>
                     <ProfileAbout 
-                        userFullName={data.getPublicUser.userName}
-                        islandName={data.getPublicUser.islandName}
-                        userFriendCode={`Friend Code: ${data.getPublicUser.friendCode}`}
-                        userAbout={data.getPublicUser.aboutText}
-                        avatarUrl={data.getPublicUser.avatarUrl}
+                        publicUser={publicUser}
                     />
                     <Post 
                         type="text"

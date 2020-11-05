@@ -82,7 +82,7 @@ const SignInForm = () => {
         if (isValid) {
             signIn({ variables: {input: {email: form.email, password: form.password}}})
                 .then( r => {
-                    login(r.data.login.token);
+                    login(r.data.login);
                 })
                 .catch( e => {
                     console.log(e);

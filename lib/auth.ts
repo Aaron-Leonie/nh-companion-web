@@ -18,12 +18,17 @@ export const auth = ctx => {
   return token
 }
 
-export const login = (token) => {
+export const login = ({token, userId}) => {
     cookie.set('token', token);
+    cookie.set('user', userId);
     Router.push('/feed');
 }
 
 export const logout = () => {
   cookie.remove('token');
   Router.push('/sign-in');
+}
+
+export const getUser = () => {
+  return cookie.get('user');
 }
