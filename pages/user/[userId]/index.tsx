@@ -53,7 +53,7 @@ const UserProfile = () => {
     }
     
     if(loading) {
-        return(<SignedIn><div><p>Loading...</p></div></SignedIn>);
+        return(<SignedIn>Loading...</SignedIn>);
     }
 
     return (

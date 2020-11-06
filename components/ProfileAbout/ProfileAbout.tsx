@@ -29,6 +29,22 @@ const ProfileAbout = (props: ProfileAboutProps) => {
         setEditToggle(!editToggle);
     }
 
+    const handleUserUpdate = (e, fieldName) => {
+        switch(fieldName) {
+            case 'aboutText':
+                setPublicUser({...publicUser, aboutText: e.target.value});
+                break;
+            case 'islandName':
+                setPublicUser({...publicUser, islandName: e.target.value});
+                break;
+            case 'friendCode':
+                setPublicUser({...publicUser, friendCode: e.target.value});
+                break;
+            default:
+                break;
+        }
+    }
+
 
     // Templates
     
@@ -59,7 +75,7 @@ const ProfileAbout = (props: ProfileAboutProps) => {
                     <p>{publicUser.aboutText}</p>
                 </div>
             </div>
-        )
+        );
     }
 
     if(currentUser !== props.publicUser.userId && !editToggle) {
@@ -101,7 +117,11 @@ const ProfileAbout = (props: ProfileAboutProps) => {
                             <span>{publicUser.userName}</span>
                         </div>
                         <div className={styles.islandName}>
-                            <TextField id="standard-basic" label="Island Name" autoComplete="off"/>
+                            <TextField 
+                                label="Island Name" 
+                                autoComplete="off" 
+                                value={publicUser.islandName}
+                                onChange = {(e) => {handleUserUpdate(e, 'islandName')}} />
                         </div>
                     </div>
                         <span className={styles.headerButtons}>
@@ -109,10 +129,20 @@ const ProfileAbout = (props: ProfileAboutProps) => {
                         </span>
                 </div>
                 <div className={styles.friendCode}>
-                    <TextField id="standard-basic" label="Friend Code" autoComplete="off"/>
+                    <TextField  
+                    label="Friend Code" 
+                    autoComplete="off"
+                    value={publicUser.friendCode}
+                    onChange={(e) => {handleUserUpdate(e, 'friendCode')}}
+                    />
                 </div>
                 <div className={styles.aboutText}>
-                <TextareaAutosize className={styles.textArea} rowsMax={3} rowsMin={3} placeholder=""  />
+                <TextareaAutosize 
+                    className={styles.textArea} 
+                    rowsMax={3} 
+                    rowsMin={3} 
+                    value={publicUser.aboutText} 
+                    onChange={(e) => {handleUserUpdate(e, 'aboutText')}}/>
                 </div>
             </div>
         );
